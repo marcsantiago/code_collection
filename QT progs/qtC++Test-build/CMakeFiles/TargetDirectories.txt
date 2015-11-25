@@ -1,0 +1,1 @@
+/Users/marcsantago/Desktop/QT progs/qtC++Test-build/CMakeFiles/qtC++Test.dir

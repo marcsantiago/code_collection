@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>TclOO Commands - copy manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> copy</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+oo::copy - create copies of objects and classes 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+package require TclOO<br>
+<br>
+<b>oo::copy</b> <i>sourceObject</i> ?<i>targetObject</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>oo::copy</b> command creates a copy of an object or class.
+It takes the name of the object or class to be copied,
+<i>sourceObject</i>, and optionally the name of the object or class
+to create, <i>targetObject</i>, which will be resolved relative to
+the current namespace if not an absolute qualified name. If
+<i>targetObject</i> is omitted, a new name is chosen. The copied
+object will be of the same class as the source object, and will
+have all its per-object methods copied. If it is a class, it will
+also have all the class methods in the class copied, but it will
+not have any of its instances copied. 
+
+<p>After the <i>targetObject</i> has been created and all
+definitions of its configuration (e.g., methods, filters, mixins)
+copied, the <b>&lt;cloned&gt;</b> method of <i>targetObject</i>
+will be invoked, to allow for customization of the created object
+such as installing related variable traces. The only argument given
+will be <i>sourceObject</i>. The default implementation of this
+method (in <b><a href="../TclCmd/object.htm">oo::object</a></b>)
+just copies the procedures and variables in the namespace of
+<i>sourceObject</i> to the namespace of <i>targetObject</i>. If
+this method call does not return a result that is successful (i.e.,
+an error or other kind of exception) then the <i>targetObject</i>
+will be deleted and an error returned.</p>
+
+<p>The result of the <b>oo::copy</b> command will be the
+fully-qualified name of the new object or class.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+This example creates an object, copies it, modifies the source
+object, and then demonstrates that the copied object is indeed a
+copy. 
+
+<pre>
+oo::object create src
+oo::objdefine src method msg {} {puts foo}
+<b>oo::copy</b> src dst
+oo::objdefine src method msg {} {puts bar}
+src msg              <i><font size=
+"+1">&rarr;</font> prints "bar"</i>
+dst msg              <i><font size=
+"+1">&rarr;</font> prints "foo"</i>
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/class.htm">oo::class</a></b>, <b><a href=
+"../TclCmd/define.htm">oo::define</a></b>, <b><a href=
+"../TclCmd/object.htm">oo::object</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#clone">clone</a>, <a href=
+"../Keywords/C.htm#copy">copy</a>, <a href=
+"../Keywords/D.htm#duplication">duplication</a>, <a href=
+"../Keywords/O.htm#object">object</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2007 Donal K. Fellows</div>
+</body>
+</html>
+

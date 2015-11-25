@@ -1,0 +1,332 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Tcl_ParseArgsObjv manual
+page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> ParseArgs</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="ParseArgs.htm#M2" name="L588">NAME</a> 
+
+<dl>
+<dd>Tcl_ParseArgsObjv - parse arguments according to a tabular
+description</dd>
+</dl>
+</dd>
+
+<dd><a href="ParseArgs.htm#M3" name="L589">SYNOPSIS</a></dd>
+
+<dd><a href="ParseArgs.htm#M4" name="L590">ARGUMENTS</a></dd>
+
+<dd><a href="ParseArgs.htm#M5" name="L591">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="ParseArgs.htm#M6" name=
+"L592"><b>TCL_ARGV_AUTO_HELP</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M7" name=
+"L593"><b>TCL_ARGV_AUTO_REST</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M8" name=
+"L594"><b>TCL_ARGV_TABLE_END</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ParseArgs.htm#M9" name="L595">ARGUMENT DESCRIPTOR
+ENTRIES</a> 
+
+<dl class="argument descriptor entries">
+<dd><a href="ParseArgs.htm#M10" name=
+"L596"><b>TCL_ARGV_CONSTANT</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M11" name=
+"L597"><b>TCL_ARGV_END</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M12" name=
+"L598"><b>TCL_ARGV_FLOAT</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M13" name=
+"L599"><b>TCL_ARGV_FUNC</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M14" name=
+"L600"><b>TCL_ARGV_GENFUNC</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M15" name=
+"L601"><b>TCL_ARGV_HELP</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M16" name=
+"L602"><b>TCL_ARGV_INT</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M17" name=
+"L603"><b>TCL_ARGV_REST</b></a></dd>
+
+<dd><a href="ParseArgs.htm#M18" name=
+"L604"><b>TCL_ARGV_STRING</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="ParseArgs.htm#M19" name="L605">SEE ALSO</a></dd>
+
+<dd><a href="ParseArgs.htm#M20" name="L606">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_ParseArgsObjv - parse arguments according to a tabular
+description 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_ParseArgsObjv</b>(<i>interp, argTable, objcPtr, objv,
+remObjv</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(out)</dt>
+
+<dd>Where to store error messages.</dd>
+
+<dt>const Tcl_ArgvInfo <b>*argTable</b> (in)</dt>
+
+<dd>Pointer to array of option descriptors.</dd>
+
+<dt>int <b>*objcPtr</b> (in/out)</dt>
+
+<dd>A pointer to variable holding number of arguments in
+<i>objv</i>. Will be modified to hold number of arguments left in
+the unprocessed argument list stored in <i>remObjv</i>.</dd>
+
+<dt>Tcl_Obj *const <b>*objv</b> (in)</dt>
+
+<dd>The array of arguments to be parsed.</dd>
+
+<dt>Tcl_Obj <b>***remObjv</b> (out)</dt>
+
+<dd>Pointer to a variable that will hold the array of unprocessed
+arguments. Should be NULL if no return of unprocessed arguments is
+required. If <i>objcPtr</i> is updated to a non-zero value, the
+array returned through this must be deallocated using <b><a href=
+"../TclLib/Alloc.htm">ckfree</a></b>.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The <b>Tcl_ParseArgsObjv</b> function provides a system for parsing
+argument lists of the form &ldquo;<b>-someName</b> <i>someValue</i>
+...&rdquo;. Such argument lists are commonly found both in the
+arguments to a program and in the arguments to an individual Tcl
+command. This parser assumes that the order of the arguments does
+not matter, other than in so far as later copies of a duplicated
+option overriding earlier ones. 
+
+<p>The argument array is described by the <i>objcPtr</i> and
+<i>objv</i> parameters, and an array of unprocessed arguments is
+returned through the <i>objcPtr</i> and <i>remObjv</i> parameters;
+if no return of unprocessed arguments is desired, the
+<i>remObjv</i> parameter should be NULL. If any problems happen,
+including if the &ldquo;generate help&rdquo; option is selected, an
+error message is left in the interpreter result and TCL_ERROR is
+returned. Otherwise, the interpreter result is left unchanged and
+TCL_OK is returned.</p>
+
+<p>The collection of arguments to be parsed is described by the
+<i>argTable</i> parameter. This points to a table of descriptor
+structures that is terminated by an entry with the <i>type</i>
+field set to TCL_ARGV_END. As convenience, the following
+prototypical entries are provided:</p>
+
+<dl class="description">
+<dt><a name="M6"><b>TCL_ARGV_AUTO_HELP</b></a></dt>
+
+<dd>Enables the argument processor to provide help when passed the
+argument &ldquo;<b>-help</b>&rdquo;.</dd>
+
+<dt><a name="M7"><b>TCL_ARGV_AUTO_REST</b></a></dt>
+
+<dd>Instructs the argument processor that arguments after
+&ldquo;<b>--</b>&rdquo; are to be unprocessed.</dd>
+
+<dt><a name="M8"><b>TCL_ARGV_TABLE_END</b></a></dt>
+
+<dd>Marks the end of the table of argument descriptors.</dd>
+</dl>
+
+<h4><a name="M9">ARGUMENT DESCRIPTOR ENTRIES</a></h4>
+
+Each entry of the argument descriptor table must be a structure of
+type <b>Tcl_ArgvInfo</b>. The structure is defined as this: 
+
+<pre>
+typedef struct {
+    int <i>type</i>;
+    const char *<i>keyStr</i>;
+    void *<i>srcPtr</i>;
+    void *<i>dstPtr</i>;
+    const char *<i>helpStr</i>;
+    ClientData <i>clientData</i>;
+} <b>Tcl_ArgvInfo</b>;
+</pre>
+
+<p>The <i>keyStr</i> field contains the name of the option; by
+convention, this will normally begin with a &ldquo;<b>-</b>&rdquo;
+character. The <i>type</i>, <i>srcPtr</i>, <i>dstPtr</i> and
+<i>clientData</i> fields describe the interpretation of the value
+of the argument, as described below. The <i>helpStr</i> field gives
+some text that is used to provide help to users when they request
+it.</p>
+
+<p>As noted above, the <i>type</i> field is used to describe the
+interpretation of the argument's value. The following values are
+acceptable values for <i>type</i>:</p>
+
+<dl class="argument descriptor entries">
+<dt><a name="M10"><b>TCL_ARGV_CONSTANT</b></a></dt>
+
+<dd>The argument does not take any following value argument. If
+this argument is present, the int pointed to by the <i>srcPtr</i>
+field is copied to the <i>dstPtr</i> field. The <i>clientData</i>
+field is ignored.</dd>
+
+<dt><a name="M11"><b>TCL_ARGV_END</b></a></dt>
+
+<dd>This value marks the end of all option descriptors in the
+table. All other fields are ignored.</dd>
+
+<dt><a name="M12"><b>TCL_ARGV_FLOAT</b></a></dt>
+
+<dd>This argument takes a following floating point value argument.
+The value (once parsed by <b><a href=
+"../TclLib/DoubleObj.htm">Tcl_GetDoubleFromObj</a></b>) will be
+stored as a double-precision value in the variable pointed to by
+the <i>dstPtr</i> field. The <i>srcPtr</i> and <i>clientData</i>
+fields are ignored.</dd>
+
+<dt><a name="M13"><b>TCL_ARGV_FUNC</b></a></dt>
+
+<dd>This argument optionally takes a following value argument; it
+is up to the handler callback function passed in <i>srcPtr</i> to
+decide. That function will have the following signature: 
+
+<pre>
+typedef int (<b>Tcl_ArgvFuncProc</b>)(
+        ClientData <i>clientData</i>,
+        Tcl_Obj *<i>objPtr</i>,
+        void *<i>dstPtr</i>);
+</pre>
+
+<p>The result is a boolean value indicating whether to consume the
+following argument. The <i>clientData</i> is the value from the
+table entry, the <i>objPtr</i> is the value that represents the
+following argument or NULL if there are no following arguments at
+all, and the <i>dstPtr</i> argument to the <b>Tcl_ArgvFuncProc</b>
+is the location to write the parsed value to.</p>
+</dd>
+
+<dt><a name="M14"><b>TCL_ARGV_GENFUNC</b></a></dt>
+
+<dd>This argument takes zero or more following arguments; the
+handler callback function passed in <i>srcPtr</i> returns how many
+(or a negative number to signal an error, in which case it should
+also set the interpreter result). The function will have the
+following signature: 
+
+<pre>
+typedef int (<b>Tcl_ArgvGenFuncProc</b>)(
+        ClientData <i>clientData</i>,
+        <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+        int <i>objc</i>,
+        Tcl_Obj *const *<i>objv</i>,
+        void *<i>dstPtr</i>);
+</pre>
+
+<p>The <i>clientData</i> is the value from the table entry, the
+<i>interp</i> is where to store any error messages, the
+<i>keyStr</i> is the name of the argument, <i>objc</i> and
+<i>objv</i> describe an array of all the remaining arguments, and
+<i>dstPtr</i> argument to the <b>Tcl_ArgvGenFuncProc</b> is the
+location to write the parsed value (or values) to.</p>
+</dd>
+
+<dt><a name="M15"><b>TCL_ARGV_HELP</b></a></dt>
+
+<dd>This special argument does not take any following value
+argument, but instead causes <b>Tcl_ParseArgsObjv</b> to generate
+an error message describing the arguments supported. All other
+fields except the <i>helpStr</i> field are ignored.</dd>
+
+<dt><a name="M16"><b>TCL_ARGV_INT</b></a></dt>
+
+<dd>This argument takes a following integer value argument. The
+value (once parsed by <b><a href=
+"../TclLib/IntObj.htm">Tcl_GetIntFromObj</a></b>) will be stored as
+an int in the variable pointed to by the <i>dstPtr</i> field. The
+<i>srcPtr</i> field is ignored.</dd>
+
+<dt><a name="M17"><b>TCL_ARGV_REST</b></a></dt>
+
+<dd>This special argument does not take any following value
+argument, but instead marks all following arguments to be left
+unprocessed. The <i>srcPtr</i>, <i>dstPtr</i> and <i>clientData</i>
+fields are ignored.</dd>
+
+<dt><a name="M18"><b>TCL_ARGV_STRING</b></a></dt>
+
+<dd>This argument takes a following string value argument. A
+pointer to the string will be stored at <i>dstPtr</i>; the string
+inside will have a lifetime linked to the lifetime of the string
+representation of the argument value that it came from, and so
+should be copied if it needs to be retained. The <i>srcPtr</i> and
+<i>clientData</i> fields are ignored.</dd>
+</dl>
+
+<h3><a name="M19">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/GetIndex.htm">Tcl_GetIndexFromObj</a></b>,
+<b><a href="../TclLib/Tcl_Main.htm">Tcl_Main</a></b>, <b><a href=
+"../TclLib/CrtObjCmd.htm">Tcl_CreateObjCommand</a></b> 
+
+<h3><a name="M20">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#argument">argument</a>, <a href=
+"../Keywords/P.htm#parse">parse</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Donal K. Fellows</div>
+</body>
+</html>
+

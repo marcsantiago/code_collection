@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>TclOO Commands - self manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> self</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="self.htm#M2" name="L1695">NAME</a> 
+
+<dl>
+<dd>self - method call internal introspection</dd>
+</dl>
+</dd>
+
+<dd><a href="self.htm#M3" name="L1696">SYNOPSIS</a> 
+
+<dl>
+<dd>package require TclOO</dd>
+
+<dd><b>self</b> ?<i>subcommand</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="self.htm#M4" name="L1697">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="self.htm#M5" name="L1698"><b>self call</b></a></dd>
+
+<dd><a href="self.htm#M6" name="L1699"><b>self caller</b></a></dd>
+
+<dd><a href="self.htm#M7" name="L1700"><b>self class</b></a></dd>
+
+<dd><a href="self.htm#M8" name="L1701"><b>self filter</b></a></dd>
+
+<dd><a href="self.htm#M9" name="L1702"><b>self method</b></a></dd>
+
+<dd><a href="self.htm#M10" name="L1703"><b>self
+namespace</b></a></dd>
+
+<dd><a href="self.htm#M11" name="L1704"><b>self next</b></a></dd>
+
+<dd><a href="self.htm#M12" name="L1705"><b>self object</b></a></dd>
+
+<dd><a href="self.htm#M13" name="L1706"><b>self target</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="self.htm#M14" name="L1707">EXAMPLES</a></dd>
+
+<dd><a href="self.htm#M15" name="L1708">SEE ALSO</a></dd>
+
+<dd><a href="self.htm#M16" name="L1709">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+self - method call internal introspection 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+package require TclOO<br>
+<br>
+<b>self</b> ?<i>subcommand</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>self</b> command, which should only be used from within the
+context of a call to a method (i.e. inside a method, constructor or
+destructor body) is used to allow the method to discover
+information about how it was called. It takes an argument,
+<i>subcommand</i>, that tells it what sort of information is
+actually desired; if omitted the result will be the same as if
+<b>self object</b> was invoked. The supported subcommands are: 
+
+<dl class="description">
+<dt><a name="M5"><b>self call</b></a></dt>
+
+<dd>This returns a two-element list describing the method
+implementations used to implement the current call chain. The first
+element is the same as would be reported by <b><a href=
+"../TclCmd/info.htm">info object</a></b> <b>call</b> for the
+current method (except that this also reports useful values from
+within constructors and destructors, whose names are reported as
+<b>&lt;constructor&gt;</b> and <b>&lt;destructor&gt;</b>
+respectively), and the second element is an index into the first
+element's list that indicates which actual implementation is
+currently executing (the first implementation to execute is always
+at index 0).</dd>
+
+<dt><a name="M6"><b>self caller</b></a></dt>
+
+<dd>When the method was invoked from inside another object method,
+this subcommand returns a three element list describing the
+containing object and method. The first element describes the
+declaring object or class of the method, the second element is the
+name of the object on which the containing method was invoked, and
+the third element is the name of the method (with the strings
+<b>&lt;constructor&gt;</b> and <b>&lt;destructor&gt;</b> indicating
+constructors and destructors respectively).</dd>
+
+<dt><a name="M7"><b>self class</b></a></dt>
+
+<dd>This returns the name of the class that the current method was
+defined within. Note that this will change as the chain of method
+implementations is traversed with <b><a href=
+"../TclCmd/next.htm">next</a></b>, and that if the method was
+defined on an object then this will fail. 
+
+<p>If you want the class of the current object, you need to use
+this other construct:</p>
+
+<pre>
+info object class [<b>self object</b>]
+</pre>
+</dd>
+
+<dt><a name="M8"><b>self filter</b></a></dt>
+
+<dd>When invoked inside a filter, this subcommand returns a three
+element list describing the filter. The first element gives the
+name of the object or class that declared the filter (note that
+this may be different from the object or class that provided the
+implementation of the filter), the second element is either
+<b>object</b> or <b>class</b> depending on whether the declaring
+entity was an object or class, and the third element is the name of
+the filter.</dd>
+
+<dt><a name="M9"><b>self method</b></a></dt>
+
+<dd>This returns the name of the current method (with the strings
+<b>&lt;constructor&gt;</b> and <b>&lt;destructor&gt;</b> indicating
+constructors and destructors respectively).</dd>
+
+<dt><a name="M10"><b>self namespace</b></a></dt>
+
+<dd>This returns the name of the unique namespace of the object
+that the method was invoked upon.</dd>
+
+<dt><a name="M11"><b>self next</b></a></dt>
+
+<dd>When invoked from a method that is not at the end of a call
+chain (i.e. where the <b><a href="../TclCmd/next.htm">next</a></b>
+command will invoke an actual method implementation), this
+subcommand returns a two element list describing the next element
+in the method call chain; the first element is the name of the
+class or object that declares the next part of the call chain, and
+the second element is the name of the method (with the strings
+<b>&lt;constructor&gt;</b> and <b>&lt;destructor&gt;</b> indicating
+constructors and destructors respectively). If invoked from a
+method that is at the end of a call chain, this subcommand returns
+the empty string.</dd>
+
+<dt><a name="M12"><b>self object</b></a></dt>
+
+<dd>This returns the name of the object that the method was invoked
+upon.</dd>
+
+<dt><a name="M13"><b>self target</b></a></dt>
+
+<dd>When invoked inside a filter implementation, this subcommand
+returns a two element list describing the method being filtered.
+The first element will be the name of the declarer of the method,
+and the second element will be the actual name of the method.</dd>
+</dl>
+
+<h3><a name="M14">EXAMPLES</a></h3>
+
+This example shows basic use of <b>self</b> to provide information
+about the current object: 
+
+<pre>
+oo::class create c {
+    method foo {} {
+        puts "this is the [<b>self</b>] object"
+    }
+}
+c create a
+c create b
+a foo                <i><font size=
+"+1">&rarr;</font> prints "this is the ::a object"</i>
+b foo                <i><font size=
+"+1">&rarr;</font> prints "this is the ::b object"</i>
+</pre>
+
+<p>This demonstrates what a method call chain looks like, and how
+traversing along it changes the index into it:</p>
+
+<pre>
+oo::class create c {
+    method x {} {
+        puts "Cls: [<b>self call</b>]"
+    }
+}
+c create a
+oo::objdefine a {
+    method x {} {
+        puts "Obj: [<b>self call</b>]"
+        next
+        puts "Obj: [<b>self call</b>]"
+    }
+}
+a x     <i><font size=
+"+1">&rarr;</font> Obj: {{method x object method} {method x ::c method}} 0</i>
+        <i><font size=
+"+1">&rarr;</font> Cls: {{method x object method} {method x ::c method}} 1</i>
+        <i><font size=
+"+1">&rarr;</font> Obj: {{method x object method} {method x ::c method}} 0</i>
+</pre>
+
+<h3><a name="M15">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/info.htm">info</a></b>, <b><a href=
+"../TclCmd/next.htm">next</a></b> 
+
+<h3><a name="M16">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#call">call</a>, <a href=
+"../Keywords/I.htm#introspection">introspection</a>, <a href=
+"../Keywords/O.htm#object">object</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2007 Donal K. Fellows</div>
+</body>
+</html>
+

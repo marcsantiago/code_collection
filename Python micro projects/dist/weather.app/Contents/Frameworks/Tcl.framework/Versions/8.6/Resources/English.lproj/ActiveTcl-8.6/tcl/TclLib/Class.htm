@@ -1,0 +1,374 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>TclOO Library Functions - Tcl_Class manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Class</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="Class.htm#M2" name="L86">NAME</a> 
+
+<dl>
+<dd>Tcl_ClassGetMetadata, Tcl_ClassSetMetadata,
+Tcl_CopyObjectInstance, Tcl_GetClassAsObject, Tcl_GetObjectAsClass,
+Tcl_GetObjectCommand, Tcl_GetObjectFromObj, Tcl_GetObjectName,
+Tcl_GetObjectNamespace, Tcl_NewObjectInstance, Tcl_ObjectDeleted,
+Tcl_ObjectGetMetadata, Tcl_ObjectGetMethodNameMapper,
+Tcl_ObjectSetMetadata, Tcl_ObjectSetMethodNameMapper - manipulate
+objects and classes</dd>
+</dl>
+</dd>
+
+<dd><a href="Class.htm#M3" name="L87">SYNOPSIS</a></dd>
+
+<dd><a href="Class.htm#M4" name="L88">ARGUMENTS</a></dd>
+
+<dd><a href="Class.htm#M5" name="L89">DESCRIPTION</a></dd>
+
+<dd><a href="Class.htm#M6" name="L90">OBJECT AND CLASS
+METADATA</a></dd>
+
+<dd><a href="Class.htm#M7" name="L91">TCL_OBJECTMETADATATYPE
+STRUCTURE</a></dd>
+
+<dd><a href="Class.htm#M8" name="L92">TCL_OBJECTMETADATADELETEPROC
+FUNCTION SIGNATURE</a></dd>
+
+<dd><a href="Class.htm#M9" name="L93">TCL_CLONEPROC FUNCTION
+SIGNATURE</a></dd>
+
+<dd><a href="Class.htm#M10" name="L94">OBJECT METHOD NAME
+MAPPING</a></dd>
+
+<dd><a href="Class.htm#M11" name="L95">TCL_OBJECTMAPMETHODNAMEPROC
+FUNCTION SIGNATURE</a></dd>
+
+<dd><a href="Class.htm#M12" name="L96">SEE ALSO</a></dd>
+
+<dd><a href="Class.htm#M13" name="L97">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_ClassGetMetadata, Tcl_ClassSetMetadata, Tcl_CopyObjectInstance,
+Tcl_GetClassAsObject, Tcl_GetObjectAsClass, Tcl_GetObjectCommand,
+Tcl_GetObjectFromObj, Tcl_GetObjectName, Tcl_GetObjectNamespace,
+Tcl_NewObjectInstance, Tcl_ObjectDeleted, Tcl_ObjectGetMetadata,
+Tcl_ObjectGetMethodNameMapper, Tcl_ObjectSetMetadata,
+Tcl_ObjectSetMethodNameMapper - manipulate objects and classes 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tclOO.h&gt;</b><br>
+Tcl_Object<br>
+<b>Tcl_GetObjectFromObj</b>(<i>interp, objPtr</i>)<br>
+Tcl_Object<br>
+<b>Tcl_GetClassAsObject</b>(<i>class</i>)<br>
+Tcl_Class<br>
+<b>Tcl_GetObjectAsClass</b>(<i>object</i>)<br>
+Tcl_Obj *<br>
+<b>Tcl_GetObjectName</b>(<i>interp, object</i>)<br>
+Tcl_Command<br>
+<b>Tcl_GetObjectCommand</b>(<i>object</i>)<br>
+Tcl_Namespace *<br>
+<b>Tcl_GetObjectNamespace</b>(<i>object</i>)<br>
+Tcl_Object<br>
+<b>Tcl_NewObjectInstance</b>(<i>interp, class, name, nsName, objc,
+objv, skip</i>)<br>
+Tcl_Object<br>
+<b>Tcl_CopyObjectInstance</b>(<i>interp, object, name,
+nsName</i>)<br>
+int<br>
+<b>Tcl_ObjectDeleted</b>(<i>object</i>)<br>
+ClientData<br>
+<b>Tcl_ObjectGetMetadata</b>(<i>object, metaTypePtr</i>)<br>
+<b>Tcl_ObjectSetMetadata</b>(<i>object, metaTypePtr,
+metadata</i>)<br>
+ClientData<br>
+<b>Tcl_ClassGetMetadata</b>(<i>class, metaTypePtr</i>)<br>
+<b>Tcl_ClassSetMetadata</b>(<i>class, metaTypePtr,
+metadata</i>)<br>
+Tcl_ObjectMapMethodNameProc<br>
+<b>Tcl_ObjectGetMethodNameMapper</b>(<i>object</i>)<br>
+<b>Tcl_ObjectSetMethodNameMapper</b>(<i>object</i>,
+<i>methodNameMapper</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in/out)</dt>
+
+<dd>Interpreter providing the context for looking up or creating an
+object, and into whose result error messages will be written on
+failure.</dd>
+
+<dt>Tcl_Obj <b>*objPtr</b> (in)</dt>
+
+<dd>The name of the object to look up.</dd>
+
+<dt>Tcl_Object <b>object</b> (in)</dt>
+
+<dd>Reference to the object to operate upon.</dd>
+
+<dt>Tcl_Class <b>class</b> (in)</dt>
+
+<dd>Reference to the class to operate upon.</dd>
+
+<dt>const char <b>*name</b> (in)</dt>
+
+<dd>The name of the object to create, or NULL if a new unused name
+is to be automatically selected.</dd>
+
+<dt>const char <b>*nsName</b> (in)</dt>
+
+<dd>The name of the namespace to create for the object's private
+use, or NULL if a new unused name is to be automatically
+selected.</dd>
+
+<dt>int <b>objc</b> (in)</dt>
+
+<dd>The number of elements in the <i>objv</i> array.</dd>
+
+<dt>Tcl_Obj *const <b>*objv</b> (in)</dt>
+
+<dd>The arguments to the command to create the instance of the
+class.</dd>
+
+<dt>int <b>skip</b> (in)</dt>
+
+<dd>The number of arguments at the start of the argument array,
+<i>objv</i>, that are not arguments to any constructors.</dd>
+
+<dt>Tcl_ObjectMetadataType <b>*metaTypePtr</b> (in)</dt>
+
+<dd>The type of <i>metadata</i> being set with
+<b>Tcl_ClassSetMetadata</b> or retrieved with
+<b>Tcl_ClassGetMetadata</b>.</dd>
+
+<dt>ClientData <b>metadata</b> (in)</dt>
+
+<dd>An item of metadata to attach to the class, or NULL to remove
+the metadata associated with a particular <i>metaTypePtr</i>.</dd>
+
+<dt>Tcl_ObjectMapMethodNameProc <b>methodNameMapper</b> (in)</dt>
+
+<dd>A pointer to a function to call to adjust the mapping of
+objects and method names to implementations, or NULL when no such
+mapping is required.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+Objects are typed entities that have a set of operations
+("methods") associated with them. Classes are objects that can
+manufacture objects. Each class can be viewed as an object itself;
+the object view can be retrieved using <b>Tcl_GetClassAsObject</b>
+which always returns the object when applied to a non-destroyed
+class, and an object can be viewed as a class with the aid of the
+<b>Tcl_GetObjectAsClass</b> (which either returns the class, or
+NULL if the object is not a class). An object may be looked up
+using the <b>Tcl_GetObjectFromObj</b> function, which either
+returns an object or NULL (with an error message in the interpreter
+result) if the object cannot be found. The correct way to look up a
+class by name is to look up the object with that name, and then to
+use <b>Tcl_GetObjectAsClass</b>. 
+
+<p>Every object has its own command and namespace associated with
+it. The command may be retrieved using the
+<b>Tcl_GetObjectCommand</b> function, the name of the object (and
+hence the name of the command) with <b>Tcl_GetObjectName</b>, and
+the namespace may be retrieved using the
+<b>Tcl_GetObjectNamespace</b> function. Note that the Tcl_Obj
+reference returned by <b>Tcl_GetObjectName</b> is a shared
+reference.</p>
+
+<p>Instances of classes are created using
+<b>Tcl_NewObjectInstance</b>, which takes creates an object from
+any class (and which is internally called by both the <b>create</b>
+and <b>new</b> methods of the <b><a href=
+"../TclCmd/class.htm">oo::class</a></b> class). It takes parameters
+that optionally give the name of the object and namespace to
+create, and which describe the arguments to pass to the class's
+constructor (if any). The result of the function will be either a
+reference to the newly created object, or NULL if the creation
+failed (when an error message will be left in the interpreter
+result). In addition, objects may be copied by using
+<b>Tcl_CopyObjectInstance</b> which creates a copy of an object
+without running any constructors.</p>
+
+<h3><a name="M6">OBJECT AND CLASS METADATA</a></h3>
+
+Every object and every class may have arbitrary amounts of metadata
+attached to it, which the object or class attaches no meaning to
+beyond what is described in a Tcl_ObjectMetadataType structure
+instance. Metadata to be attached is described by the type of the
+metadata (given in the <i>metaTypePtr</i> argument) and an
+arbitrary pointer (the <i>metadata</i> argument) that are given to
+<b>Tcl_ObjectSetMetadata</b> and <b>Tcl_ClassSetMetadata</b>, and a
+particular piece of metadata can be retrieved given its type using
+<b>Tcl_ObjectGetMetadata</b> and <b>Tcl_ClassGetMetadata</b>. If
+the <i>metadata</i> parameter to either
+<b>Tcl_ObjectSetMetadata</b> or <b>Tcl_ClassSetMetadata</b> is
+NULL, the metadata is removed if it was attached, and the results
+of <b>Tcl_ObjectGetMetadata</b> and <b>Tcl_ClassGetMetadata</b> are
+NULL if the given type of metadata was not attached. It is not an
+error to request or remove a piece of metadata that was not
+attached. 
+
+<h4><a name="M7">TCL_OBJECTMETADATATYPE STRUCTURE</a></h4>
+
+The contents of the Tcl_ObjectMetadataType structure are as
+follows: 
+
+<pre>
+typedef const struct {
+    int <i>version</i>;
+    const char *<i>name</i>;
+    Tcl_ObjectMetadataDeleteProc *<i>deleteProc</i>;
+    Tcl_CloneProc *<i>cloneProc</i>;
+} <b>Tcl_ObjectMetadataType</b>;
+</pre>
+
+<p>The <i>version</i> field allows for future expansion of the
+structure, and should always be declared equal to
+TCL_OO_METADATA_VERSION_CURRENT. The <i>name</i> field provides a
+human-readable name for the type, and is reserved for
+debugging.</p>
+
+<p>The <i>deleteProc</i> field gives a function of type
+Tcl_ObjectMetadataDeleteProc that is used to delete a particular
+piece of metadata, and is called when the attached metadata is
+replaced or removed; the field must not be NULL.</p>
+
+<p>The <i>cloneProc</i> field gives a function that is used to copy
+a piece of metadata (used when a copy of an object is created using
+<b>Tcl_CopyObjectInstance</b>); if NULL, the metadata will be just
+directly copied.</p>
+
+<h4><a name="M8">TCL_OBJECTMETADATADELETEPROC FUNCTION
+SIGNATURE</a></h4>
+
+Functions matching this signature are used to delete metadata
+associated with a class or object. 
+
+<pre>
+typedef void <b>Tcl_ObjectMetadataDeleteProc</b>(
+        ClientData <i>metadata</i>);
+</pre>
+
+<p>The <i>metadata</i> argument gives the address of the metadata
+to be deleted.</p>
+
+<h4><a name="M9">TCL_CLONEPROC FUNCTION SIGNATURE</a></h4>
+
+Functions matching this signature are used to create copies of
+metadata associated with a class or object. 
+
+<pre>
+typedef int <b>Tcl_CloneProc</b>(
+        <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+        ClientData <i>srcMetadata</i>,
+        ClientData *<i>dstMetadataPtr</i>);
+</pre>
+
+<p>The <i>interp</i> argument gives a place to write an error
+message when the attempt to clone the object is to fail, in which
+case the clone procedure must also return TCL_ERROR; it should
+return TCL_OK otherwise. The <i>srcMetadata</i> argument gives the
+address of the metadata to be cloned, and the cloned metadata
+should be written into the variable pointed to by
+<i>dstMetadataPtr</i>; a NULL should be written if the metadata is
+to not be cloned but the overall object copy operation is still to
+succeed.</p>
+
+<h3><a name="M10">OBJECT METHOD NAME MAPPING</a></h3>
+
+It is possible to control, on a per-object basis, what methods are
+invoked when a particular method is invoked. Normally this is done
+by looking up the method name in the object and then in the class
+hierarchy, but fine control of exactly what the value used to
+perform the look up is afforded through the ability to set a method
+name mapper callback via <b>Tcl_ObjectSetMethodNameMapper</b> (and
+its introspection counterpart,
+<b>Tcl_ObjectGetMethodNameMapper</b>, which returns the current
+mapper). The current mapper (if any) is invoked immediately before
+looking up what chain of method implementations is to be used. 
+
+<h4><a name="M11">TCL_OBJECTMAPMETHODNAMEPROC FUNCTION
+SIGNATURE</a></h4>
+
+The <i>Tcl_ObjectMapMethodNameProc</i> callback is defined as
+follows: 
+
+<pre>
+typedef int <b>Tcl_ObjectMapMethodNameProc</b>(
+        <a href=
+"../TclLib/Interp.htm">Tcl_Interp</a> *<i>interp</i>,
+        Tcl_Object <i>object</i>,
+        Tcl_Class *<i>startClsPtr</i>,
+        Tcl_Obj *<i>methodNameObj</i>);
+</pre>
+
+<p>If the result is TCL_OK, the remapping is assumed to have been
+done. If the result is TCL_ERROR, an error message will have been
+left in <i>interp</i> and the method call will fail. If the result
+is TCL_BREAK, the standard method name lookup rules will be used;
+the behavior of other result codes is currently undefined. The
+<i>object</i> parameter says which object is being processed. The
+<i>startClsPtr</i> parameter points to a variable that contains the
+first class to provide a definition in the method chain to process,
+or NULL if the whole chain is to be processed (the argument itself
+is never NULL); this variable may be updated by the callback. The
+<i>methodNameObj</i> parameter gives an unshared object containing
+the name of the method being invoked, as provided by the user; this
+object may be updated by the callback.</p>
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b>Method</b>, <b><a href="../TclCmd/class.htm">oo::class</a></b>,
+<b><a href="../TclCmd/copy.htm">oo::copy</a></b>, <b><a href=
+"../TclCmd/define.htm">oo::define</a></b>, <b><a href=
+"../TclCmd/object.htm">oo::object</a></b> 
+
+<h3><a name="M13">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/C.htm#constructor">constructor</a>, <a href=
+"../Keywords/O.htm#object">object</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2007 Donal K. Fellows</div>
+</body>
+</html>
+

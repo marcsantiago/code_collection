@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - throw manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> throw</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+throw - Generate a machine-readable error 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>throw</b> <i>type message</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command causes the current evaluation to be unwound with an
+error. The error created is described by the <i>type</i> and
+<i>message</i> arguments: <i>type</i> must contain a list of words
+describing the error in a form that is machine-readable (and which
+will form the error-code part of the result dictionary), and
+<i>message</i> should contain text that is intended for display to
+a human being. 
+
+<p>The stack will be unwound until the error is trapped by a
+suitable <b><a href="../TclCmd/catch.htm">catch</a></b> or <b><a
+href="../TclCmd/try.htm">try</a></b> command. If it reaches the
+event loop without being trapped, it will be reported through the
+<b><a href="../TclCmd/bgerror.htm">bgerror</a></b> mechanism. If it
+reaches the top level of script evaluation in <b><a href=
+"../UserCmd/tclsh.htm">tclsh</a></b>, it will be printed on the
+console before, in the non-interactive case, causing an exit (the
+behavior in other programs will depend on the details of how Tcl is
+embedded and used).</p>
+
+<p>By convention, the words in the <i>type</i> argument should go
+from most general to most specific.</p>
+
+<h3><a name="M5">EXAMPLES</a></h3>
+
+The following produces an error that is identical to that produced
+by <b><a href="../TclCmd/expr.htm">expr</a></b> when trying to
+divide a value by zero. 
+
+<pre>
+<b>throw</b> {ARITH DIVZERO {divide by zero}} {divide by zero}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/catch.htm">catch</a></b>, <b><a href=
+"../TclCmd/error.htm">error</a></b>, <b>errorCode</b>,
+<b>errorInfo</b>, <b><a href="../TclCmd/return.htm">return</a></b>,
+<b><a href="../TclCmd/try.htm">try</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/E.htm#error">error</a>, <a href=
+"../Keywords/E.htm#exception">exception</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Donal K. Fellows</div>
+</body>
+</html>
+

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Library Procedures - Load manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclLib</a>
+<small>&gt;</small> Load</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+Tcl_LoadFile, Tcl_FindSymbol - platform-independent dynamic library
+loading 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>#include &lt;tcl.h&gt;</b><br>
+int<br>
+<b>Tcl_LoadFile</b>(<i>interp, pathPtr, symbols, flags, procPtrs,
+loadHandlePtr</i>)<br>
+void *<br>
+<b>Tcl_FindSymbol</b>(<i>interp, loadHandle, symbol</i>)<br>
+<h3><a name="M4">ARGUMENTS</a></h3>
+
+<dl class="arguments">
+<dt><a href="../TclLib/Interp.htm">Tcl_Interp</a> <b>*interp</b>
+(in)</dt>
+
+<dd>Interpreter to use for reporting error messages.</dd>
+
+<dt>Tcl_Obj <b>*pathPtr</b> (in)</dt>
+
+<dd>The name of the file to load. If it is a single name, the
+library search path of the current environment will be used to
+resolve it.</dd>
+
+<dt>const char *const <b>symbols[]</b> (in)</dt>
+
+<dd>Array of names of symbols to be resolved during the load of the
+library, or NULL if no symbols are to be resolved. If an array is
+given, the last entry in the array must be NULL.</dd>
+
+<dt>int <b>flags</b> (in)</dt>
+
+<dd>The value should normally be 0, but <i>TCL_LOAD_GLOBAL</i> or
+<i>TCL_LOAD_LAZY</i> or a combination of those two is allowed as
+well.</dd>
+
+<dt>void <b>*procPtrs</b> (out)</dt>
+
+<dd>Points to an array that will hold the addresses of the
+functions described in the <i>symbols</i> argument. Should be NULL
+if no symbols are to be resolved.</dd>
+
+<dt>Tcl_LoadHandle <b>*loadHandlePtr</b> (out)</dt>
+
+<dd>Points to a variable that will hold the handle to the abstract
+token describing the library that has been loaded.</dd>
+
+<dt>Tcl_LoadHandle <b>loadHandle</b> (in)</dt>
+
+<dd>Abstract token describing the library to look up a symbol
+in.</dd>
+
+<dt>const char <b>*symbol</b> (in)</dt>
+
+<dd>The name of the symbol to look up.</dd>
+</dl>
+
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+<b>Tcl_LoadFile</b> loads a file from the filesystem (including
+potentially any virtual filesystem that has been installed) and
+provides a handle to it that may be used in further operations. The
+<i>symbols</i> array, if non-NULL, supplies a set of names of
+symbols (typically functions) that must be resolved from the
+library and which will be stored in the array indicated by
+<i>procPtrs</i>. If any of the symbols is not resolved, the loading
+of the file will fail with an error message left in the interpreter
+(if that is non-NULL). The result of <b>Tcl_LoadFile</b> is a
+standard Tcl error code. The library may be unloaded with <b><a
+href="../TclLib/FileSystem.htm">Tcl_FSUnloadFile</a></b>. 
+
+<p><b>Tcl_FindSymbol</b> locates a symbol in a loaded library and
+returns it. If the symbol cannot be found, it returns NULL and sets
+an error message in the given <i>interp</i> (if that is non-NULL).
+Note that it is unsafe to use this operation on a handle that has
+been passed to <b><a href=
+"../TclLib/FileSystem.htm">Tcl_FSUnloadFile</a></b>.</p>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclLib/FileSystem.htm">Tcl_FSLoadFile</a></b>, <b><a
+href="../TclLib/FileSystem.htm">Tcl_FSUnloadFile</a></b>, <b><a
+href="../TclCmd/load.htm">load</a></b>, <b><a href=
+"../TclCmd/unload.htm">unload</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#binary code">binary code</a>, <a href=
+"../Keywords/L.htm#loading">loading</a>, <a href=
+"../Keywords/S.htm#shared library">shared library</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2009-2010 Kevin B. Kenny Copyright &copy; 2010
+Donal K. Fellows</div>
+</body>
+</html>
+

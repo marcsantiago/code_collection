@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>TclOO Commands - class manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> class</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="class.htm#M2" name="L182">NAME</a> 
+
+<dl>
+<dd>oo::class - class of all classes</dd>
+</dl>
+</dd>
+
+<dd><a href="class.htm#M3" name="L183">SYNOPSIS</a> 
+
+<dl>
+<dd>package require TclOO</dd>
+
+<dd><b>oo::class</b> <i>method</i> ?<i>arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="class.htm#M4" name="L184">CLASS HIERARCHY</a></dd>
+
+<dd><a href="class.htm#M5" name="L185">DESCRIPTION</a></dd>
+
+<dd><a href="class.htm#M6" name="L186">CONSTRUCTOR</a></dd>
+
+<dd><a href="class.htm#M7" name="L187">DESTRUCTOR</a></dd>
+
+<dd><a href="class.htm#M8" name="L188">EXPORTED METHODS</a> 
+
+<dl class="exported methods">
+<dd><a href="class.htm#M9" name="L189"><i>cls</i> <b>create</b>
+<i>name</i> ?<i>arg ...</i>?</a></dd>
+
+<dd><a href="class.htm#M10" name="L190"><i>cls</i> <b>new</b>
+?<i>arg ...</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="class.htm#M11" name="L191">NON-EXPORTED METHODS</a> 
+
+<dl class="non-exported methods">
+<dd><a href="class.htm#M12" name="L192"><i>cls</i>
+<b>createWithNamespace</b> <i>name nsName</i> ?<i>arg
+...</i>?</a></dd>
+</dl>
+</dd>
+
+<dd><a href="class.htm#M13" name="L193">EXAMPLES</a></dd>
+
+<dd><a href="class.htm#M14" name="L194">SEE ALSO</a></dd>
+
+<dd><a href="class.htm#M15" name="L195">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+oo::class - class of all classes 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+package require TclOO<br>
+<br>
+<b>oo::class</b> <i>method</i> ?<i>arg ...</i>?<br>
+<h3><a name="M4">CLASS HIERARCHY</a></h3>
+
+<b><a href="../TclCmd/object.htm">oo::object</a></b><br>
+ <font size="+1">&rarr;</font> <b>oo::class</b><br>
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+Classes are objects that can manufacture other objects according to
+a pattern stored in the factory object (the class). An instance of
+the class is created by calling one of the class's factory methods,
+typically either <b>create</b> if an explicit name is being given,
+or <b>new</b> if an arbitrary unique name is to be automatically
+selected. 
+
+<p>The <b>oo::class</b> class is the class of all classes; every
+class is an instance of this class, which is consequently an
+instance of itself. This class is a subclass of <b><a href=
+"../TclCmd/object.htm">oo::object</a></b>, so every class is also
+an object. Additional metaclasses (i.e., classes of classes) can be
+defined if necessary by subclassing <b>oo::class</b>. Note that the
+<b>oo::class</b> object hides the <b>new</b> method on itself, so
+new classes should always be made using the <b>create</b>
+method.</p>
+
+<h4><a name="M6">CONSTRUCTOR</a></h4>
+
+The constructor of the <b>oo::class</b> class takes an optional
+argument which, if present, is sent to the <b><a href=
+"../TclCmd/define.htm">oo::define</a></b> command (along with the
+name of the newly-created class) to allow the class to be
+conveniently configured at creation time. 
+
+<h4><a name="M7">DESTRUCTOR</a></h4>
+
+The <b>oo::class</b> class does not define an explicit destructor.
+However, when a class is destroyed, all its subclasses and
+instances are also destroyed, along with all objects that it has
+been mixed into. 
+
+<h4><a name="M8">EXPORTED METHODS</a></h4>
+
+<dl class="exported methods">
+<dt><a name="M9"><i>cls</i> <b>create</b> <i>name</i> ?<i>arg
+...</i>?</a></dt>
+
+<dd>This creates a new instance of the class <i>cls</i> called
+<i>name</i> (which is resolved within the calling context's
+namespace if not fully qualified), passing the arguments, <i>arg
+...</i>, to the constructor, and (if that returns a successful
+result) returning the fully qualified name of the created object
+(the result of the constructor is ignored). If the constructor
+fails (i.e. returns a non-OK result) then the object is destroyed
+and the error message is the result of this method call.</dd>
+
+<dt><a name="M10"><i>cls</i> <b>new</b> ?<i>arg ...</i>?</a></dt>
+
+<dd>This creates a new instance of the class <i>cls</i> with a new
+unique name, passing the arguments, <i>arg ...</i>, to the
+constructor, and (if that returns a successful result) returning
+the fully qualified name of the created object (the result of the
+constructor is ignored). If the constructor fails (i.e., returns a
+non-OK result) then the object is destroyed and the error message
+is the result of this method call. 
+
+<p>Note that this method is not exported by the <b>oo::class</b>
+object itself, so classes should not be created using this
+method.</p>
+</dd>
+</dl>
+
+<h4><a name="M11">NON-EXPORTED METHODS</a></h4>
+
+The <b>oo::class</b> class supports the following non-exported
+methods: 
+
+<dl class="non-exported methods">
+<dt><a name="M12"><i>cls</i> <b>createWithNamespace</b> <i>name
+nsName</i> ?<i>arg ...</i>?</a></dt>
+
+<dd>This creates a new instance of the class <i>cls</i> called
+<i>name</i> (which is resolved within the calling context's
+namespace if not fully qualified), passing the arguments, <i>arg
+...</i>, to the constructor, and (if that returns a successful
+result) returning the fully qualified name of the created object
+(the result of the constructor is ignored). The name of the
+instance's internal namespace will be <i>nsName</i> unless that
+namespace already exists (when an arbitrary name will be chosen
+instead). If the constructor fails (i.e., returns a non-OK result)
+then the object is destroyed and the error message is the result of
+this method call.</dd>
+</dl>
+
+<h3><a name="M13">EXAMPLES</a></h3>
+
+This example defines a simple class hierarchy and creates a new
+instance of it. It then invokes a method of the object before
+destroying the hierarchy and showing that the destruction is
+transitive. 
+
+<pre>
+<b>oo::class create</b> fruit {
+    method eat {} {
+        puts "yummy!"
+    }
+}
+<b>oo::class create</b> banana {
+    superclass fruit
+    constructor {} {
+        my variable peeled
+        set peeled 0
+    }
+    method peel {} {
+        my variable peeled
+        set peeled 1
+        puts "skin now off"
+    }
+    method edible? {} {
+        my variable peeled
+        return $peeled
+    }
+    method eat {} {
+        if {![my edible?]} {
+            my peel
+        }
+        next
+    }
+}
+set b [banana <b>new</b>]
+$b eat               <i><font size=
+"+1">&rarr;</font> prints "skin now off" and "yummy!"</i>
+fruit destroy
+$b eat               <i><font size=
+"+1">&rarr;</font> error "unknown command"</i>
+</pre>
+
+<h3><a name="M14">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/define.htm">oo::define</a></b>, <b><a href=
+"../TclCmd/object.htm">oo::object</a></b> 
+
+<h3><a name="M15">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/M.htm#metaclass">metaclass</a>, <a href=
+"../Keywords/O.htm#object">object</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2007 Donal K. Fellows</div>
+</body>
+</html>
+

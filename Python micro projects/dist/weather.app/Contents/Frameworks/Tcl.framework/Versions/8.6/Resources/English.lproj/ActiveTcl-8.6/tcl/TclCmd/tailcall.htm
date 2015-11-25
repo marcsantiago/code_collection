@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - tailcall manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> tailcall</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+tailcall - Replace the current procedure with another command 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>tailcall</b> <i>command</i> ?<i>arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The <b>tailcall</b> command replaces the currently executing
+procedure, lambda application, or method with another command. The
+<i>command</i>, which will have <i>arg ...</i> passed as arguments
+if they are supplied, will be looked up in the current namespace
+context, not in the caller's. Apart from that difference in
+resolution, it is equivalent to: 
+
+<pre>
+return [uplevel 1 [list <i>command</i> ?<i>arg ...</i>?]]
+</pre>
+
+<p>This command may not be invoked from within an <b><a href=
+"../TclCmd/uplevel.htm">uplevel</a></b> into a procedure or inside
+a <b><a href="../TclCmd/catch.htm">catch</a></b> inside a procedure
+or lambda.</p>
+
+<h3><a name="M5">EXAMPLE</a></h3>
+
+Compute the factorial of a number. 
+
+<pre>
+proc factorial {n {accum 1}} {
+    if {$n &lt; 2} {
+        return $accum
+    }
+    <b>tailcall</b> factorial [expr {$n - 1}] [expr {$accum * $n}]
+}
+</pre>
+
+<p>Print the elements of a list with alternating lines having
+different indentations.</p>
+
+<pre>
+proc printList {theList} {
+    if {[llength $theList]} {
+        puts "&gt; [lindex $theList 0]"
+        <b>tailcall</b> printList2 [lrange $theList 1 end]
+    }
+}
+proc printList2 {theList} {
+    if {[llength $theList]} {
+        puts "&lt; [lindex $theList 0]"
+        <b>tailcall</b> printList [lrange $theList 1 end]
+    }
+}
+</pre>
+
+<h3><a name="M6">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/apply.htm">apply</a></b>, <b><a href=
+"../TclCmd/proc.htm">proc</a></b>, <b><a href=
+"../TclCmd/uplevel.htm">uplevel</a></b> 
+
+<h3><a name="M7">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#call">call</a>, <a href=
+"../Keywords/R.htm#recursion">recursion</a>, <a href=
+"../Keywords/T.htm#tail recursion">tail recursion</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 1993 The Regents of the University of California.
+Copyright &copy; 1994-1996 Sun Microsystems, Inc.</div>
+</body>
+</html>
+

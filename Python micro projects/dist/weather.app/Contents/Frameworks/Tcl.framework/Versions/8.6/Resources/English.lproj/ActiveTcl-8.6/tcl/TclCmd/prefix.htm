@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - prefix manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> prefix</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="prefix.htm#M2" name="L1396">NAME</a> 
+
+<dl>
+<dd>tcl::prefix - facilities for prefix matching</dd>
+</dl>
+</dd>
+
+<dd><a href="prefix.htm#M3" name="L1397">SYNOPSIS</a> 
+
+<dl>
+<dd><b>::tcl::prefix all</b> <i>table</i> <i>string</i></dd>
+
+<dd><b>::tcl::prefix longest</b> <i>table</i> <i>string</i></dd>
+
+<dd><b>::tcl::prefix match</b> <i>?option ...?</i> <i>table</i>
+<i>string</i></dd>
+</dl>
+</dd>
+
+<dd><a href="prefix.htm#M4" name="L1398">DESCRIPTION</a> 
+
+<dl class="description">
+<dd><a href="prefix.htm#M5" name="L1399"><b>::tcl::prefix all</b>
+<i>table</i> <i>string</i></a></dd>
+
+<dd><a href="prefix.htm#M6" name="L1400"><b>::tcl::prefix
+longest</b> <i>table</i> <i>string</i></a></dd>
+
+<dd><a href="prefix.htm#M7" name="L1401"><b>::tcl::prefix match</b>
+?<i>options</i>? <i>table</i> <i>string</i></a> 
+
+<dl class="description">
+<dd><a href="prefix.htm#M8" name="L1402"><b>-exact</b></a></dd>
+
+<dd><a href="prefix.htm#M9" name="L1403"><b>-message</b>
+<i>string</i></a></dd>
+
+<dd><a href="prefix.htm#M10" name="L1404"><b>-error</b>
+<i>options</i></a></dd>
+</dl>
+</dd>
+</dl>
+</dd>
+
+<dd><a href="prefix.htm#M11" name="L1405">EXAMPLES</a></dd>
+
+<dd><a href="prefix.htm#M12" name="L1406">SEE ALSO</a></dd>
+
+<dd><a href="prefix.htm#M13" name="L1407">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+tcl::prefix - facilities for prefix matching 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>::tcl::prefix all</b> <i>table</i> <i>string</i><br>
+<b>::tcl::prefix longest</b> <i>table</i> <i>string</i><br>
+<b>::tcl::prefix match</b> <i>?option ...?</i> <i>table</i>
+<i>string</i><br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This document describes commands looking up a prefix in a list of
+strings. The following commands are supported: 
+
+<dl class="description">
+<dt><a name="M5"><b>::tcl::prefix all</b> <i>table</i>
+<i>string</i></a></dt>
+
+<dd>Returns a list of all elements in <i>table</i> that begin with
+the prefix <i>string</i>.</dd>
+
+<dt><a name="M6"><b>::tcl::prefix longest</b> <i>table</i>
+<i>string</i></a></dt>
+
+<dd>Returns the longest common prefix of all elements in
+<i>table</i> that begin with the prefix <i>string</i>.</dd>
+
+<dt><a name="M7"><b>::tcl::prefix match</b> ?<i>options</i>?
+<i>table</i> <i>string</i></a></dt>
+
+<dd>If <i>string</i> equals one element in <i>table</i> or is a
+prefix to exactly one element, the matched element is returned. If
+not, the result depends on the <b>-error</b> option. (It is
+recommended that the <i>table</i> be sorted before use with this
+subcommand, so that the list of matches presented in the error
+message also becomes sorted, though this is not strictly necessary
+for the operation of this subcommand itself.) 
+
+<dl class="description">
+<dt><a name="M8"><b>-exact</b></a></dt>
+
+<dd>Accept only exact matches.</dd>
+
+<dt><a name="M9"><b>-message</b> <i>string</i></a></dt>
+
+<dd>Use <i>string</i> in the error message at a mismatch. Default
+is &ldquo;option&rdquo;.</dd>
+
+<dt><a name="M10"><b>-error</b> <i>options</i></a></dt>
+
+<dd>The <i>options</i> are used when no match is found. If
+<i>options</i> is empty, no error is generated and an empty string
+is returned. Otherwise the <i>options</i> are used as <b><a href=
+"../TclCmd/return.htm">return</a></b> options when generating the
+error message. The default corresponds to setting &ldquo;-level
+0&rdquo;. Example: If &ldquo;<b>-error</b> {-errorcode MyError
+-level 1}&rdquo; is used, an error would be generated as: 
+
+<pre>
+return -errorcode MyError -level 1 -code error \
+       "ambiguous option ..."
+</pre>
+</dd>
+</dl>
+</dd>
+</dl>
+
+<h3><a name="M11">EXAMPLES</a></h3>
+
+Basic use: 
+
+<pre>
+namespace import ::tcl::prefix
+<b>prefix match</b> {apa bepa cepa} apa
+     <i><font size="+1">&rarr;</font> apa</i>
+<b>prefix match</b> {apa bepa cepa} a
+     <i><font size="+1">&rarr;</font> apa</i>
+<b>prefix match</b> -exact {apa bepa cepa} a
+     <i><font size=
+"+1">&rarr;</font> bad option "a": must be apa, bepa, or cepa</i>
+<b>prefix match</b> -message "switch" {apa ada bepa cepa} a
+     <i><font size=
+"+1">&rarr;</font> ambiguous switch "a": must be apa, ada, bepa, or cepa</i>
+<b>prefix longest</b> {fblocked fconfigure fcopy file fileevent flush} fc
+     <i><font size="+1">&rarr;</font> fco</i>
+<b>prefix all</b> {fblocked fconfigure fcopy file fileevent flush} fc
+     <i><font size="+1">&rarr;</font> fconfigure fcopy</i>
+</pre>
+
+<p>Simplifying option matching:</p>
+
+<pre>
+array set opts {-apa 1 -bepa "" -cepa 0}
+foreach {arg val} $args {
+    set opts([<b>prefix match</b> {-apa -bepa -cepa} $arg]) $val
+}
+</pre>
+
+<p>Creating a <b><a href="../TclCmd/switch.htm">switch</a></b> that
+supports prefixes:</p>
+
+<pre>
+switch [<b>prefix match</b> {apa bepa cepa} $arg] {
+    apa  { }
+    bepa { }
+    cepa { }
+}
+</pre>
+
+<h3><a name="M12">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/lsearch.htm">lsearch</a></b>, <b><a href=
+"../TclCmd/namespace.htm">namespace</a></b>, <b><a href=
+"../TclCmd/string.htm">string</a></b>, <b><a href=
+"../TclLib/GetIndex.htm">Tcl_GetIndexFromObj</a></b> 
+
+<h3><a name="M13">KEYWORDS</a></h3>
+
+<a href="../Keywords/P.htm#prefix">prefix</a>, <a href=
+"../Keywords/T.htm#table lookup">table lookup</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Peter Spjuth
+&lt;pspjuth(at)users.sourceforge.net&gt;</div>
+</body>
+</html>
+

@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>TclOO Commands - object manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> object</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="object.htm#M2" name="L1249">NAME</a> 
+
+<dl>
+<dd>oo::object - root class of the class hierarchy</dd>
+</dl>
+</dd>
+
+<dd><a href="object.htm#M3" name="L1250">SYNOPSIS</a> 
+
+<dl>
+<dd>package require TclOO</dd>
+
+<dd><b>oo::object</b> <i>method</i> ?<i>arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="object.htm#M4" name="L1251">CLASS HIERARCHY</a></dd>
+
+<dd><a href="object.htm#M5" name="L1252">DESCRIPTION</a></dd>
+
+<dd><a href="object.htm#M6" name="L1253">CONSTRUCTOR</a></dd>
+
+<dd><a href="object.htm#M7" name="L1254">DESTRUCTOR</a></dd>
+
+<dd><a href="object.htm#M8" name="L1255">EXPORTED METHODS</a> 
+
+<dl class="exported methods">
+<dd><a href="object.htm#M9" name="L1256"><i>obj</i>
+<b>destroy</b></a></dd>
+</dl>
+</dd>
+
+<dd><a href="object.htm#M10" name="L1257">NON-EXPORTED METHODS</a> 
+
+<dl class="non-exported methods">
+<dd><a href="object.htm#M11" name="L1258"><i>obj</i> <b>eval</b>
+?<i>arg ...</i>?</a></dd>
+
+<dd><a href="object.htm#M12" name="L1259"><i>obj</i> <b>unknown
+?</b><i>methodName</i>? ?<i>arg ...</i>?</a></dd>
+
+<dd><a href="object.htm#M13" name="L1260"><i>obj</i>
+<b>variable</b> ?<i>varName ...</i>?</a></dd>
+
+<dd><a href="object.htm#M14" name="L1261"><i>obj</i> <b>varname</b>
+<i>varName</i></a></dd>
+
+<dd><a href="object.htm#M15" name="L1262"><i>obj</i>
+<b>&lt;cloned&gt;</b> <i>sourceObjectName</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="object.htm#M16" name="L1263">EXAMPLES</a></dd>
+
+<dd><a href="object.htm#M17" name="L1264">SEE ALSO</a></dd>
+
+<dd><a href="object.htm#M18" name="L1265">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+oo::object - root class of the class hierarchy 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+package require TclOO<br>
+<br>
+<b>oo::object</b> <i>method</i> ?<i>arg ...</i>?<br>
+<h3><a name="M4">CLASS HIERARCHY</a></h3>
+
+<b>oo::object</b><br>
+<h3><a name="M5">DESCRIPTION</a></h3>
+
+The <b>oo::object</b> class is the root class of the object
+hierarchy; every object is an instance of this class. Since classes
+are themselves objects, they are instances of this class too.
+Objects are always referred to by their name, and may be <b><a
+href="../TclCmd/rename.htm">rename</a></b>d while maintaining their
+identity. 
+
+<p>Instances of objects may be made with either the <b>create</b>
+or <b>new</b> methods of the <b>oo::object</b> object itself, or by
+invoking those methods on any of the subclass objects; see <b><a
+href="../TclCmd/class.htm">oo::class</a></b> for more details. The
+configuration of individual objects (i.e., instance-specific
+methods, mixed-in classes, etc.) may be controlled with the <b><a
+href="../TclCmd/define.htm">oo::objdefine</a></b> command.</p>
+
+<p>Each object has a unique namespace associated with it, the
+instance namespace. This namespace holds all the instance variables
+of the object, and will be the current namespace whenever a method
+of the object is invoked (including a method of the class of the
+object). When the object is destroyed, its instance namespace is
+deleted. The instance namespace contains the object's <b><a href=
+"../TclCmd/my.htm">my</a></b> command, which may be used to invoke
+non-exported methods of the object or to create a reference to the
+object for the purpose of invocation which persists across
+renamings of the object.</p>
+
+<h4><a name="M6">CONSTRUCTOR</a></h4>
+
+The <b>oo::object</b> class does not define an explicit
+constructor. 
+
+<h4><a name="M7">DESTRUCTOR</a></h4>
+
+The <b>oo::object</b> class does not define an explicit destructor.
+
+
+<h4><a name="M8">EXPORTED METHODS</a></h4>
+
+The <b>oo::object</b> class supports the following exported
+methods: 
+
+<dl class="exported methods">
+<dt><a name="M9"><i>obj</i> <b>destroy</b></a></dt>
+
+<dd>This method destroys the object, <i>obj</i>, that it is invoked
+upon, invoking any destructors on the object's class in the
+process. It is equivalent to using <b><a href=
+"../TclCmd/rename.htm">rename</a></b> to delete the object command.
+The result of this method is always the empty string.</dd>
+</dl>
+
+<h4><a name="M10">NON-EXPORTED METHODS</a></h4>
+
+The <b>oo::object</b> class supports the following non-exported
+methods: 
+
+<dl class="non-exported methods">
+<dt><a name="M11"><i>obj</i> <b>eval</b> ?<i>arg ...</i>?</a></dt>
+
+<dd>This method concatenates the arguments, <i>arg</i>, as if with
+<b><a href="../TclCmd/concat.htm">concat</a></b>, and then
+evaluates the resulting script in the namespace that is uniquely
+associated with <i>obj</i>, returning the result of the
+evaluation.</dd>
+
+<dt><a name="M12"><i>obj</i> <b>unknown ?</b><i>methodName</i>?
+?<i>arg ...</i>?</a></dt>
+
+<dd>This method is called when an attempt to invoke the method
+<i>methodName</i> on object <i>obj</i> fails. The arguments that
+the user supplied to the method are given as <i>arg</i> arguments.
+If <i>methodName</i> is absent, the object was invoked with no
+method name at all (or any other arguments). The default
+implementation (i.e., the one defined by the <b>oo::object</b>
+class) generates a suitable error, detailing what methods the
+object supports given whether the object was invoked by its public
+name or through the <b><a href="../TclCmd/my.htm">my</a></b>
+command.</dd>
+
+<dt><a name="M13"><i>obj</i> <b>variable</b> ?<i>varName
+...</i>?</a></dt>
+
+<dd>This method arranges for each variable called <i>varName</i> to
+be linked from the object <i>obj</i>'s unique namespace into the
+caller's context. Thus, if it is invoked from inside a procedure
+then the namespace variable in the object is linked to the local
+variable in the procedure. Each <i>varName</i> argument must not
+have any namespace separators in it. The result is the empty
+string.</dd>
+
+<dt><a name="M14"><i>obj</i> <b>varname</b> <i>varName</i></a></dt>
+
+<dd>This method returns the globally qualified name of the variable
+<i>varName</i> in the unique namespace for the object
+<i>obj</i>.</dd>
+
+<dt><a name="M15"><i>obj</i> <b>&lt;cloned&gt;</b>
+<i>sourceObjectName</i></a></dt>
+
+<dd>This method is used by the <b>oo::object</b> command to copy
+the state of one object to another. It is responsible for copying
+the procedures and variables of the namespace of the source object
+(<i>sourceObjectName</i>) to the current object. It does not copy
+any other types of commands or any traces on the variables; that
+can be added if desired by overriding this method in a
+subclass.</dd>
+</dl>
+
+<h3><a name="M16">EXAMPLES</a></h3>
+
+This example demonstrates basic use of an object. 
+
+<pre>
+set obj [<b>oo::object</b> new]
+$obj foo             <i><font size=
+"+1">&rarr;</font> error "unknown method foo"</i>
+oo::objdefine $obj method foo {} {
+    my <b><a href="../TclCmd/variable.htm">variable</a></b> count
+    puts "bar[incr count]"
+}
+$obj foo             <i><font size=
+"+1">&rarr;</font> prints "bar1"</i>
+$obj foo             <i><font size=
+"+1">&rarr;</font> prints "bar2"</i>
+$obj variable count  <i><font size=
+"+1">&rarr;</font> error "unknown method variable"</i>
+$obj <b><a href="../TkCmd/destroy.htm">destroy</a></b>
+$obj foo             <i><font size=
+"+1">&rarr;</font> error "unknown command obj"</i>
+</pre>
+
+<h3><a name="M17">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/my.htm">my</a></b>, <b><a href=
+"../TclCmd/class.htm">oo::class</a></b> 
+
+<h3><a name="M18">KEYWORDS</a></h3>
+
+<a href="../Keywords/B.htm#base class">base class</a>, <a href=
+"../Keywords/C.htm#class">class</a>, <a href=
+"../Keywords/O.htm#object">object</a>, <a href=
+"../Keywords/R.htm#root class">root class</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2007-2008 Donal K. Fellows</div>
+</body>
+</html>
+

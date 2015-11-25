@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - try manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> try</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<h3><a name="M2">NAME</a></h3>
+
+try - Trap and process errors and exceptions 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>try</b> <i>body</i> ?<i>handler...</i>? ?<b>finally</b>
+<i>script</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+This command executes the script <i>body</i> and, depending on what
+the outcome of that script is (normal exit, error, or some other
+exceptional result), runs a handler script to deal with the case.
+Once that has all happened, if the <b>finally</b> clause is
+present, the <i>script</i> it includes will be run and the result
+of the handler (or the <i>body</i> if no handler matched) is
+allowed to continue to propagate. Note that the <b>finally</b>
+clause is processed even if an error occurs and irrespective of
+which, if any, <i>handler</i> is used. 
+
+<p>The <i>handler</i> clauses are each expressed as several words,
+and must have one of the following forms:</p>
+
+<dl class="description">
+<dt><a name="M5"><b>on</b> <i>code variableList script</i></a></dt>
+
+<dd>This clause matches if the evaluation of <i>body</i> completed
+with the exception code <i>code</i>. The <i>code</i> may be
+expressed as an integer or one of the following literal words:
+<b>ok</b>, <b><a href="../TclCmd/error.htm">error</a></b>, <b><a
+href="../TclCmd/return.htm">return</a></b>, <b><a href=
+"../TclCmd/break.htm">break</a></b>, or <b><a href=
+"../TclCmd/continue.htm">continue</a></b>. Those literals
+correspond to the integers 0 through 4 respectively.</dd>
+
+<dt><a name="M6"><b>trap</b> <i>pattern variableList
+script</i></a></dt>
+
+<dd>This clause matches if the evaluation of <i>body</i> resulted
+in an error and the prefix of the <b>-errorcode</b> from the
+interpreter's status dictionary is equal to the <i>pattern</i>. The
+number of prefix words taken from the <b>-errorcode</b> is equal to
+the list-length of <i>pattern</i>, and inter-word spaces are
+normalized in both the <b>-errorcode</b> and <i>pattern</i> before
+comparison.</dd>
+</dl>
+
+<p>The <i>variableList</i> word in each <i>handler</i> is always
+interpreted as a list of variable names. If the first word of the
+list is present and non-empty, it names a variable into which the
+result of the evaluation of <i>body</i> (from the main <b>try</b>)
+will be placed; this will contain the human-readable form of any
+errors. If the second word of the list is present and non-empty, it
+names a variable into which the options dictionary of the
+interpreter at the moment of completion of execution of <i>body</i>
+will be placed.</p>
+
+<p>The <i>script</i> word of each <i>handler</i> is also always
+interpreted the same: as a Tcl script to evaluate if the clause is
+matched. If <i>script</i> is a literal &ldquo;-&rdquo; and the
+<i>handler</i> is not the last one, the <i>script</i> of the
+following <i>handler</i> is invoked instead (just like with the
+<b><a href="../TclCmd/switch.htm">switch</a></b> command).</p>
+
+<p>Note that <i>handler</i> clauses are matched against in order,
+and that the first matching one is always selected. At most one
+<i>handler</i> clause will selected. As a consequence, an <b>on
+error</b> will mask any subsequent <b>trap</b> in the <b>try</b>.
+Also note that <b>on error</b> is equivalent to <b>trap {}</b>.</p>
+
+<p>If an exception (i.e. any non-<b>ok</b> result) occurs during
+the evaluation of either the <i>handler</i> or the <b>finally</b>
+clause, the original exception's status dictionary will be added to
+the new exception's status dictionary under the <b>-during</b>
+key.</p>
+
+<h3><a name="M7">EXAMPLES</a></h3>
+
+Ensure that a file is closed no matter what: 
+
+<pre>
+set f [open /some/file/name a]
+<b>try</b> {
+    puts $f "some message"
+    # ...
+} <b>finally</b> {
+    close $f
+}
+</pre>
+
+<p>Handle different reasons for a file to not be openable for
+reading:</p>
+
+<pre>
+<b>try</b> {
+    set f [open /some/file/name w]
+} <b>trap</b> {POSIX EISDIR} {} {
+    puts "failed to open /some/file/name: it's a directory"
+} <b>trap</b> {POSIX ENOENT} {} {
+    puts "failed to open /some/file/name: it doesn't exist"
+}
+</pre>
+
+<h3><a name="M8">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/catch.htm">catch</a></b>, <b><a href=
+"../TclCmd/error.htm">error</a></b>, <b><a href=
+"../TclCmd/return.htm">return</a></b>, <b><a href=
+"../TclCmd/throw.htm">throw</a></b> 
+
+<h3><a name="M9">KEYWORDS</a></h3>
+
+<a href="../Keywords/C.htm#cleanup">cleanup</a>, <a href=
+"../Keywords/E.htm#error">error</a>, <a href=
+"../Keywords/E.htm#exception">exception</a>, <a href=
+"../Keywords/F.htm#final">final</a>, <a href=
+"../Keywords/R.htm#resource management">resource management</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Donal K. Fellows</div>
+</body>
+</html>
+

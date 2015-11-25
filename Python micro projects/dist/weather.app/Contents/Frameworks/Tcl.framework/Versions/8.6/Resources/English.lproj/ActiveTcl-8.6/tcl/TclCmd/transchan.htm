@@ -1,0 +1,301 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta name='Author' content='ActiveState'>
+<link rel='stylesheet' type='text/css' href='../../aspn.css'>
+<title>Tcl Built-In Commands - transchan manual page</title>
+<link rel="stylesheet" href="../docs.css" type="text/css" media=
+"all">
+</head>
+<body>
+<div class="banner">
+<table width="100%" border="0" cellspacing="0" cellpadding="3">
+<tr>
+<td align="left"><a target="_blank" href=
+"http://www.activestate.com/activetcl"><img src=
+"../../images/ActiveTcl.gif" border="0" align="left" alt=
+"ActiveTcl"></a> </td>
+<td align="center" class="heading">ActiveTcl User Guide</td>
+<td align="right"><a target="_blank" href=
+"http://www.activestate.com"><img src="../../images/AS_logo.gif"
+border="0" align="right" alt="ActiveState Software Inc."></a> </td>
+</tr>
+</table>
+</div>
+
+<br>
+<h2><a href="../contents.htm">Tcl/Tk Documentation</a>
+<small>&gt;</small> <a href="contents.htm">TclCmd</a>
+<small>&gt;</small> transchan</h2>
+
+<h3><a href="../UserCmd/contents.htm">Tcl/Tk Applications</a> | <a
+href="../TclCmd/contents.htm">Tcl Commands</a> | <a href=
+"../TkCmd/contents.htm">Tk Commands</a> | <a href=
+"../TclLib/contents.htm">Tcl Library</a> | <a href=
+"../TkLib/contents.htm">Tk Library</a></h3>
+
+<dl>
+<dd><a href="transchan.htm#M2" name="L2105">NAME</a> 
+
+<dl>
+<dd>transchan - command handler API of channel transforms</dd>
+</dl>
+</dd>
+
+<dd><a href="transchan.htm#M3" name="L2106">SYNOPSIS</a> 
+
+<dl>
+<dd><b>cmdPrefix</b> <i>option</i> ?<i>arg arg ...</i>?</dd>
+</dl>
+</dd>
+
+<dd><a href="transchan.htm#M4" name="L2107">DESCRIPTION</a></dd>
+
+<dd><a href="transchan.htm#M5" name="L2108">GENERIC SUBCOMMANDS</a>
+
+
+<dl class="generic subcommands">
+<dd><a href="transchan.htm#M6" name="L2109"><i>cmdPrefix</i>
+<b>clear</b> <i>handle</i></a></dd>
+
+<dd><a href="transchan.htm#M7" name="L2110"><i>cmdPrefix</i>
+<b>finalize</b> <i>handle</i></a></dd>
+
+<dd><a href="transchan.htm#M8" name="L2111"><i>cmdPrefix</i>
+<b>initialize</b> <i>handle mode</i></a> 
+
+<dl class="generic subcommands">
+<dd><a href="transchan.htm#M9" name="L2112"><b>write</b></a></dd>
+
+<dd><a href="transchan.htm#M10" name="L2113"><b>read</b></a></dd>
+</dl>
+</dd>
+</dl>
+</dd>
+
+<dd><a href="transchan.htm#M11" name="L2114">READ-RELATED
+SUBCOMMANDS</a> 
+
+<dl class="read-related subcommands">
+<dd><a href="transchan.htm#M12" name="L2115"><i>cmdPrefix</i>
+<b>drain</b> <i>handle</i></a></dd>
+
+<dd><a href="transchan.htm#M13" name="L2116"><i>cmdPrefix</i>
+<b>limit?</b> <i>handle</i></a></dd>
+
+<dd><a href="transchan.htm#M14" name="L2117"><i>cmdPrefix</i>
+<b>read</b> <i>handle buffer</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="transchan.htm#M15" name="L2118">WRITE-RELATED
+SUBCOMMANDS</a> 
+
+<dl class="write-related subcommands">
+<dd><a href="transchan.htm#M16" name="L2119"><i>cmdPrefix</i>
+<b>flush</b> <i>handle</i></a></dd>
+
+<dd><a href="transchan.htm#M17" name="L2120"><i>cmdPrefix</i>
+<b>write</b> <i>handle buffer</i></a></dd>
+</dl>
+</dd>
+
+<dd><a href="transchan.htm#M18" name="L2121">SEE ALSO</a></dd>
+
+<dd><a href="transchan.htm#M19" name="L2122">KEYWORDS</a></dd>
+</dl>
+
+<h3><a name="M2">NAME</a></h3>
+
+transchan - command handler API of channel transforms 
+
+<h3><a name="M3">SYNOPSIS</a></h3>
+
+<b>cmdPrefix</b> <i>option</i> ?<i>arg arg ...</i>?<br>
+<h3><a name="M4">DESCRIPTION</a></h3>
+
+The Tcl-level handler for a channel transformation has to be a
+command with subcommands (termed an <i>ensemble</i> despite not
+implying that it must be created with <b>namespace ensemble
+create</b>; this mechanism is not tied to <b>namespace ensemble</b>
+in any way). Note that <i>cmdPrefix</i> is whatever was specified
+in the call to <b>chan push</b>, and may consist of multiple
+arguments; this will be expanded to multiple words in place of the
+prefix. 
+
+<p>Of all the possible subcommands, the handler <i>must</i> support
+<b>initialize</b> and <b>finalize</b>. Transformations for writable
+channels must also support <b>write</b>, and transformations for
+readable channels must also support <b><a href=
+"../TclCmd/read.htm">read</a></b>.</p>
+
+<p>Note that in the descriptions below <i>cmdPrefix</i> may be more
+than one word, and <i>handle</i> is the value returned by the
+<b>chan push</b> call used to create the transformation.</p>
+
+<h4><a name="M5">GENERIC SUBCOMMANDS</a></h4>
+
+The following subcommands are relevant to all types of channel. 
+
+<dl class="generic subcommands">
+<dt><a name="M6"><i>cmdPrefix</i> <b>clear</b>
+<i>handle</i></a></dt>
+
+<dd>This optional subcommand is called to signify to the
+transformation that any data stored in internal buffers (either
+incoming or outgoing) must be cleared. It is called when a <b>chan
+seek</b> is performed on the channel being transformed.</dd>
+
+<dt><a name="M7"><i>cmdPrefix</i> <b>finalize</b>
+<i>handle</i></a></dt>
+
+<dd>This mandatory subcommand is called last for the given
+<i>handle</i>, and then never again, and it exists to allow for
+cleaning up any Tcl-level data structures associated with the
+transformation. <i>Warning!</i> Any errors thrown by this
+subcommand will be ignored. It is not guaranteed to be called if
+the interpreter is deleted.</dd>
+
+<dt><a name="M8"><i>cmdPrefix</i> <b>initialize</b> <i>handle
+mode</i></a></dt>
+
+<dd>This mandatory subcommand is called first, and then never again
+(for the given <i>handle</i>). Its responsibility is to initialize
+all parts of the transformation at the Tcl level. The <i>mode</i>
+is a list containing any of <b>read</b> and <b>write</b>. 
+
+<dl class="generic subcommands">
+<dt><a name="M9"><b>write</b></a></dt>
+
+<dd>implies that the channel is writable.</dd>
+
+<dt><a name="M10"><b>read</b></a></dt>
+
+<dd>implies that the channel is readable.</dd>
+</dl>
+
+<p>The return value of the subcommand should be a list containing
+the names of all subcommands supported by this handler. Any error
+thrown by the subcommand will prevent the creation of the
+transformation. The thrown error will appear as error thrown by
+<b>chan push</b>.</p>
+</dd>
+</dl>
+
+<h4><a name="M11">READ-RELATED SUBCOMMANDS</a></h4>
+
+These subcommands are used for handling transformations applied to
+readable channels; though strictly <b>read</b> is optional, it must
+be supported if any of the others is or the channel will be made
+non-readable. 
+
+<dl class="read-related subcommands">
+<dt><a name="M12"><i>cmdPrefix</i> <b>drain</b>
+<i>handle</i></a></dt>
+
+<dd>This optional subcommand is called whenever data in the
+transformation input (i.e. read) buffer has to be forced upward,
+i.e. towards the user or script. The result returned by the method
+is taken as the <i>binary</i> data to push upward to the level
+above this transformation (the reader or a higher-level
+transformation). 
+
+<p>In other words, when this method is called the transformation
+cannot defer the actual transformation operation anymore and has to
+transform all data waiting in its internal read buffers and return
+the result of that action.</p>
+</dd>
+
+<dt><a name="M13"><i>cmdPrefix</i> <b>limit?</b>
+<i>handle</i></a></dt>
+
+<dd>This optional subcommand is called to allow the Tcl I/O engine
+to determine how far ahead it should read. If present, it should
+return an integer number greater than zero which indicates how many
+bytes ahead should be read, or an integer less than zero to
+indicate that the I/O engine may read as far ahead as it
+likes.</dd>
+
+<dt><a name="M14"><i>cmdPrefix</i> <b>read</b> <i>handle
+buffer</i></a></dt>
+
+<dd>This subcommand, which must be present if the transformation is
+to work with readable channels, is called whenever the base
+channel, or a transformation below this transformation, pushes data
+upward. The <i>buffer</i> contains the binary data which has been
+given to us from below. It is the responsibility of this subcommand
+to actually transform the data. The result returned by the
+subcommand is taken as the binary data to push further upward to
+the transformation above this transformation. This can also be the
+user or script that originally read from the channel. 
+
+<p>Note that the result is allowed to be empty, or even less than
+the data we received; the transformation is not required to
+transform everything given to it right now. It is allowed to store
+incoming data in internal buffers and to defer the actual
+transformation until it has more data.</p>
+</dd>
+</dl>
+
+<h4><a name="M15">WRITE-RELATED SUBCOMMANDS</a></h4>
+
+These subcommands are used for handling transformations applied to
+writable channels; though strictly <b>write</b> is optional, it
+must be supported if any of the others is or the channel will be
+made non-writable. 
+
+<dl class="write-related subcommands">
+<dt><a name="M16"><i>cmdPrefix</i> <b>flush</b>
+<i>handle</i></a></dt>
+
+<dd>This optional subcommand is called whenever data in the
+transformation 'write' buffer has to be forced downward, i.e.
+towards the base channel. The result returned by the subcommand is
+taken as the binary data to write to the transformation below the
+current transformation. This can be the base channel as well. 
+
+<p>In other words, when this subcommand is called the
+transformation cannot defer the actual transformation operation
+anymore and has to transform all data waiting in its internal write
+buffers and return the result of that action.</p>
+</dd>
+
+<dt><a name="M17"><i>cmdPrefix</i> <b>write</b> <i>handle
+buffer</i></a></dt>
+
+<dd>This subcommand, which must be present if the transformation is
+to work with writable channels, is called whenever the user, or a
+transformation above this transformation, writes data downward. The
+<i>buffer</i> contains the binary data which has been written to
+us. It is the responsibility of this subcommand to actually
+transform the data. 
+
+<p>The result returned by the subcommand is taken as the binary
+data to write to the transformation below this transformation. This
+can be the base channel as well. Note that the result is allowed to
+be empty, or less than the data we got; the transformation is not
+required to transform everything which was written to it right now.
+It is allowed to store this data in internal buffers and to defer
+the actual transformation until it has more data.</p>
+</dd>
+</dl>
+
+<h3><a name="M18">SEE ALSO</a></h3>
+
+<b><a href="../TclCmd/chan.htm">chan</a></b>, <b><a href=
+"../TclCmd/refchan.htm">refchan</a></b> 
+
+<h3><a name="M19">KEYWORDS</a></h3>
+
+<a href="../Keywords/A.htm#API">API</a>, <a href=
+"../Keywords/C.htm#channel">channel</a>, <a href=
+"../Keywords/E.htm#ensemble">ensemble</a>, <a href=
+"../Keywords/P.htm#prefix">prefix</a>, <a href=
+"../Keywords/T.htm#transformation">transformation</a> 
+
+<div class="copy">Copyright &copy; 1995-1997 Roger E. Critchlow Jr.
+Copyright &copy; 2008 Donal K. Fellows</div>
+</body>
+</html>
+
