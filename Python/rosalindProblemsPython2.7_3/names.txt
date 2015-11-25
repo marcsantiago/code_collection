@@ -1,0 +1,100 @@
+ACGL  	Arch Capital Group Ltd.  	$ 57.35	   0.09▼	  0.16%	  222,557
+AFSI  	AmTrust Financial Services, Inc.  	$ 42.45	   0.04▼	  0.09%	  416,050
+AGII  	Argo Group International Holdings, Ltd.  	$ 50.67	   0.22▼	  0.43%	  240,897
+AGNC  	American Capital Agency Corp.  	$ 23.46	   0.06▲	  0.26%	  6,172,566
+ANAT  	American National Insurance Company  	$ 114.97	   1.11▼	  0.96%	  12,849
+ARCP  	American Realty Capital Properties, Inc.  	$ 12.07	   0.02▲	  0.17%	  8,478,681
+ASBC  	Associated Banc-Corp  	$ 18.01	   0.02▲	  0.11%	  629,988
+ASPS  	Altisource Portfolio Solutions S.A.  	$ 117.04	   0.49▼	  0.42%	  130,017
+BANF  	BancFirst Corporation  	$ 62.16	   0.29▲	  0.47%	  7,202
+BBCN  	BBCN Bancorp, Inc.  	$ 16.16	   0.12▲	  0.75%	  368,367
+BGCP  	BGC Partners, Inc.  	$ 7.50	   0.08▲	  1.08%	  1,118,289
+BNCL  	Beneficial Mutual Bancorp, Inc.  	$ 13.59	   0.03▼	  0.22%	  115,708
+BOKF  	BOK Financial Corporation  	$ 65.69	   0.56▲	  0.86%	  72,383
+BPOP  	Popular, Inc.  	$ 32.28	   0.24▲	  0.75%	  403,529
+BRKL  	Brookline Bancorp, Inc.  	$ 9.21	   0.04▲	  0.44%	  161,153
+CACC  	Credit Acceptance Corporation  	$ 127.20	   1.09▲	  0.86%	  33,372
+CATY  	Cathay General Bancorp  	$ 25.86	   0.12▼	  0.46%	  452,188
+CBOE  	CBOE Holdings, Inc.  	$ 50.30	   1.01▼	  1.97%	  1,110,442
+CBSH  	Commerce Bancshares, Inc.  	$ 46.02	   0.23▲	  0.5%	  465,971
+CFFN  	Capitol Federal Financial, Inc.  	$ 12.10	   0.03▲	  0.25%	  515,500
+CHFC  	Chemical Financial Corporation  	$ 29.77	   0.10▲	  0.34%	  37,089
+CINF  	Cincinnati Financial Corporation  	$ 48.73	   0.16▲	  0.33%	  498,584
+CME  	CME Group Inc.  	$ 72.28	   0.16▲	  0.22%	  1,304,077
+COLB  	Columbia Banking System, Inc.  	$ 26.48	   0.07▲	  0.27%	  343,813
+CVBF  	CVB Financial Corporation  	$ 16.23	   0.30▲	  1.88%	  647,711
+ERIE  	Erie Indemnity Company  	$ 75.37	   0.36▲	  0.48%	  36,680
+ESGR  	Enstar Group Limited  	$ 142.50	   0.58▲	  0.41%	  38,572
+ETFC  	E*TRADE Financial Corporation  	$ 21.87	   0.13▼	  0.59%	  5,543,655
+EWBC  	East West Bancorp, Inc.  	$ 35.33	   0.15▼	  0.42%	  575,218
+EZPW  	EZCORP, Inc.  	$ 11.61	   0.29▼	  2.44%	  9,026,567
+FCFS  	First Cash Financial Services, Inc.  	$ 56.39	   1.29▲	  2.34%	  171,438
+FCNCA  	First Citizens BancShares, Inc.  	$ 254.85	   3.84▼	  1.48%	  66,162
+FFBC  	First Financial Bancorp.  	$ 17.43	   0.28▲	  1.63%	  284,298
+FFIN  	First Financial Bankshares, Inc.  	$ 31.82	   0.28▲	  0.89%	  179,681
+FITB  	Fifth Third Bancorp  	$ 21.49	   0.01▲	  0.05%	  9,139,387
+FMBI  	First Midwest Bancorp, Inc.  	$ 17.43	   0.24▲	  1.4%	  460,053
+FMER  	FirstMerit Corporation  	$ 19.74	   0.12▲	  0.61%	  708,235
+FNFG  	First Niagara Financial Group Inc.  	$ 8.77	   0.03▼	  0.34%	  4,164,644
+FNGN  	Financial Engines, Inc.  	$ 49.03	   0.75▲	  1.55%	  321,265
+FSRV  	FirstService Corporation  	$ 51.14	   0.27▲	  0.53%	  4,241
+FULT  	Fulton Financial Corporation  	$ 12.48	   0.01▲	  0.08%	  920,925
+GBCI  	Glacier Bancorp, Inc.  	$ 28.09	   0.16▲	  0.57%	  264,300
+GLPI  	Gaming and Leisure Properties, Inc.  	$ 32.41	   0.10▼	  0.31%	  1,590,387
+GLRE  	Greenlight Reinsurance, Ltd.  	$ 33.73	   0.15▲	  0.45%	  67,284
+HBAN  	Huntington Bancshares Incorporated  	$ 9.55	   0.07▲	  0.74%	  8,801,031
+HBHC  	Hancock Holding Company  	$ 35.16	   0.145▲	  0.41%	  291,847
+HLSS  	Home Loan Servicing Solutions, Ltd.  	$ 22.60	   unch	  unch	  308,325
+HOMB  	Home BancShares, Inc.  	$ 33.63	   0.42▲	  1.26%	  177,266
+IBKC  	IBERIABANK Corporation  	$ 69.12	   0.95▲	  1.39%	  227,706
+IBKR  	Interactive Brokers Group, Inc.  	$ 23.70	   0.30▼	  1.25%	  493,450
+IBOC  	International Bancshares Corporation  	$ 26.60	   0.49▲	  1.88%	  224,844
+IPCC  	Infinity Property and Casualty Corporation  	$ 65.92	   0.34▼	  0.51%	  13,935
+ISBC  	Investors Bancorp, Inc.  	$ 11.03	   0.04▲	  0.36%	  3,951,284
+KRNY  	Kearny Financial  	$ 15.08	   0.01▲	  0.07%	  22,038
+LPLA  	LPL Financial Holdings Inc.  	$ 50.80	   0.34▲	  0.67%	  835,238
+MBFI  	MB Financial Inc.  	$ 27.89	   0.16▲	  0.58%	  333,603
+MHLD  	Maiden Holdings, Ltd.  	$ 11.64	   0.03▲	  0.26%	  342,540
+MKTX  	MarketAxess Holdings, Inc.  	$ 56.21	   0.955▲	  1.73%	  189,015
+MTGE  	American Capital Mortgage Investment Corp.  	$ 20.44	   0.11▲	  0.54%	  367,270
+NAVG  	The Navigators Group, Inc.  	$ 65.78	   1.06▲	  1.64%	  55,148
+NBTB  	NBT Bancorp Inc.  	$ 24.06	   0.27▲	  1.13%	  89,367
+NDAQ  	The NASDAQ OMX Group, Inc.  	$ 37.89	   0.64▲	  1.72%	  1,199,075
+NFBK  	Northfield Bancorp, Inc.  	$ 13.10	   0.02▲	  0.15%	  357,310
+NPBC  	National Penn Bancshares, Inc.  	$ 10.52	   0.02▲	  0.19%	  810,521
+NTRS  	Northern Trust Corporation  	$ 64.39	   0.50▲	  0.78%	  2,216,015
+NWBI  	Northwest Bancshares, Inc.  	$ 13.49	   0.03▲	  0.22%	  320,169
+ORIT  	Oritani Financial Corp.  	$ 15.41	   0.085▲	  0.55%	  84,748
+OZRK  	Bank of the Ozarks  	$ 65.23	   0.21▲	  0.32%	  457,056
+PACW  	PacWest Bancorp  	$ 44.08	   0.07▲	  0.16%	  835,400
+PBCT  	People's United Financial, Inc.  	$ 14.95	   0.08▲	  0.54%	  4,502,224
+PCH  	Potlatch Corporation  	$ 40.50	   0.31▲	  0.77%	  149,987
+PNFP  	Pinnacle Financial Partners, Inc.  	$ 38.51	   0.74▲	  1.96%	  174,732
+PRAA  	Portfolio Recovery Associates, Inc.  	$ 59.32	   0.77▲	  1.32%	  282,853
+PVTB  	PrivateBancorp, Inc.  	$ 29.30	   0.24▲	  0.83%	  575,390
+ROIC  	Retail Opportunity Investments Corp.  	$ 15.78	   0.26▲	  1.68%	  625,223
+SAFT  	Safety Insurance Group, Inc.  	$ 51.76	   unch	  unch	  83,870
+SBNY  	Signature Bank  	$ 122.66	   0.28▼	  0.23%	  297,736
+SBRA  	Sabra Healthcare REIT, Inc.  	$ 28.10	   0.30▲	  1.08%	  187,764
+SCBT  	First Financial Holdings, Inc.  	$ 59.95	   0.13▲	  0.22%	  49,356
+SEIC  	SEI Investments Company  	$ 32.49	   0.09▼	  0.28%	  491,963
+SIGI  	Selective Insurance Group, Inc.  	$ 25.33	   0.45▲	  1.81%	  194,679
+SIVB  	SVB Financial Group  	$ 119.31	   1.65▲	  1.4%	  782,874
+SLM  	SLM Corporation  	$ 8.68	   0.17▲	  2%	  6,074,999
+STFC  	State Auto Financial Corporation  	$ 22.90	   unch	  unch	  10,421
+SUSQ  	Susquehanna Bancshares, Inc.  	$ 10.39	   0.03▲	  0.29%	  1,120,357
+TCBI  	Texas Capital Bancshares, Inc.  	$ 54.98	   0.39▲	  0.71%	  405,403
+TFSL  	TFS Financial Corporation  	$ 14	   unch	  unch	  164,558
+TRMK  	Trustmark Corporation  	$ 24.55	   0.205▲	  0.84%	  198,719
+TROW  	T. Rowe Price Group, Inc.  	$ 83.50	   0.77▲	  0.93%	  1,387,063
+UBSI  	United Bankshares, Inc.  	$ 32.06	   0.13▲	  0.41%	  168,826
+UMBF  	UMB Financial Corporation  	$ 62.72	   0.73▲	  1.18%	  176,432
+UMPQ  	Umpqua Holdings Corporation  	$ 18	   0.36▲	  2.04%	  2,012,123
+VRTS  	Virtus Investment Partners, Inc.  	$ 199.30	   4.41▲	  2.26%	  37,794
+WABC  	Westamerica Bancorporation  	$ 52.40	   0.36▲	  0.69%	  123,363
+WAFD  	Washington Federal, Inc.  	$ 22.44	   0.39▼	  1.71%	  566,268
+WETF  	WisdomTree Investments, Inc.  	$ 11.77	   0.30▲	  2.62%	  3,104,953
+WRLD  	World Acceptance Corporation  	$ 79.91	   0.11▼	  0.14%	  69,979
+WTFC  	Wintrust Financial Corporation  	$ 45.99	   0.25▲	  0.55%	  284,865
+Z  	Zillow, Inc.  	$ 129.80	   1.30▼	  0.99%	  1,335,947
+ZION  	Zions Bancorporation  	$ 29.81	   0.04▲	  0.13%	  2,071,290
