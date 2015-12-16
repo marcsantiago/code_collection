@@ -6,7 +6,7 @@ def is_vampirenumber(multiplicand1, multiplicand2):
         
     concatenated_multiplicands = Counter(str(multiplicand1) + str(multiplicand2))
     product = Counter(str(multiplicand1 * multiplicand2))
-    for key, value in concatenated_multiplicands.items():
+    for key, value in concatenated_multiplicands.iteritems():
         if key in product.keys() and value in product.values():
             continue
         else:
